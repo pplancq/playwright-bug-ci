@@ -9,7 +9,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.45.3",
-    "@types/node": "^22.0.2"
+    "@types/node": "^22.0.2",
+    "playwright-bdd": "^7.1.2"
   },
   "volta": {
     "node": "20.16.0",

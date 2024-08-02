@@ -1,5 +1,11 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
+const { defineBddConfig } = require('playwright-bdd');
+
+const testDir = defineBddConfig({
+  features: 'tests/features/**/*.feature',
+  steps: 'tests/steps/**/*.steps.js',
+});
 
 /**
  * Read environment variables from file.
@@ -11,7 +17,7 @@ const { defineConfig, devices } = require('@playwright/test');
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
-  testDir: './tests',
+  testDir,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -35,6 +41,7 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'setup auth',
+      testDir: './tests/',
       testMatch: /global\.setup\.ts/,
     },
     {
