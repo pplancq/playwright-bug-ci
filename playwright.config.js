@@ -1,6 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
-const { defineBddConfig } = require('playwright-bdd');
+const { defineBddConfig, cucumberReporter } = require('playwright-bdd');
 
 const testDir = defineBddConfig({
   features: 'tests/features/**/*.feature',
@@ -27,7 +27,12 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    cucumberReporter('junit', {
+      outputFile: 'cucumber-report/report.xml',
+      suiteName: 'my suite'
+    }),
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */

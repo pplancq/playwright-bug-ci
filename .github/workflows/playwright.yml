@@ -18,5 +18,7 @@ jobs:
       run: npx playwright install chromium --with-deps
     - name: Generate Playwright tests
       run: npx bddgen
-    - name: Run Playwright tests
+    - name: Run Playwright tests with cucumberReporter
       run: npx playwright test
+    - name: Run Playwright tests without cucumberReporter
+      run: npx playwright test --reporter list
